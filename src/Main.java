@@ -30,13 +30,11 @@ public class Main {
 
 
 	private static int findMaxSumInTriangle(int[][] triangle) {
-		int[][] path = new int[triangle.length-1][triangle.length];
 
 		int[][] sumTriangle = new int[triangle.length][triangle.length];
 		
 		copyArray(triangle, sumTriangle);
-		
-		int k = 0;
+
 		for (int i=triangle.length-2; i>=0; i--) {
 			
 			for (int j=0; j<=i; j++) {
@@ -46,48 +44,35 @@ public class Main {
 					 &&(!isEvenNumber(triangle[i+1][j+1]))) {
 					
 					sumTriangle[i][j] += Math.max(sumTriangle[i+1][j], sumTriangle[i+1][j+1]);
-					
-					path[k][i+1] = Math.max(triangle[i+1][j], triangle[i+1][j+1]);
-					k++;
-					
+								
 				}
 				else if ((!isEvenNumber(triangle[i][j]))
 						 &&(isEvenNumber(triangle[i+1][j]))
 						 &&(isEvenNumber(triangle[i+1][j+1]))) {
 						
 					sumTriangle[i][j] += Math.max(sumTriangle[i+1][j], sumTriangle[i+1][j+1]);
-					
-					path[k][i+1] = Math.max(triangle[i+1][j], triangle[i+1][j+1]);
-					k++;
+
 				}
 				else if ((isEvenNumber(triangle[i][j]))
 						 &&(!isEvenNumber(triangle[i+1][j]))
 						 &&(isEvenNumber(triangle[i+1][j+1]))) {
-					
-					
+							
 					sumTriangle[i][j] += sumTriangle[i+1][j];
-					
-					path[k][i+1] = triangle[i+1][j];
-					k++;
+
 				}
 				else if ((isEvenNumber(triangle[i][j]))
 						 &&(isEvenNumber(triangle[i+1][j]))
 						 &&(!isEvenNumber(triangle[i+1][j+1]))) {
-					
-					
+								
 					sumTriangle[i][j] += sumTriangle[i+1][j+1];
 					
-					path[k][i+1] = triangle[i+1][j+1];
-					k++;
 				}
 				else if ((!isEvenNumber(triangle[i][j]))
 						 &&(!isEvenNumber(triangle[i+1][j]))
 						 &&(isEvenNumber(triangle[i+1][j+1]))) {
 						
 					sumTriangle[i][j] += sumTriangle[i+1][j+1];
-					
-					path[k][i+1] = triangle[i+1][j+1];
-					k++;
+
 				}
 				else if ((!isEvenNumber(triangle[i][j]))
 						 &&(isEvenNumber(triangle[i+1][j]))
@@ -95,16 +80,9 @@ public class Main {
 						
 					sumTriangle[i][j] += sumTriangle[i+1][j];
 					
-					path[k][i+1] = triangle[i+1][j];
-					k++;
-				}
-				else {
-					path[k][i+1] = -1;
-					k++;
 				}
 				
 			}	
-			k=0;
 			
 		}
 		
